@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
+import static com.api.utils.ConfigManager.*;
 import com.pojo.UserCredentials;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -17,10 +18,12 @@ public class LoginAPITest {
 	
 	@Test
 	public void loginAPITest() {
+		
 		given() 
-		.baseUri("http://64.227.160.186:9000/v1")
+		.baseUri(readPropertiesFile("BASE_URI"))
 		.contentType(JSON)
 		.body(userCreds)
+		.log().all()
 		.when()
 		.post("/login")
 		.then()
