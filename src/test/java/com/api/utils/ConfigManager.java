@@ -46,7 +46,7 @@ public class ConfigManager {
 	 }
 	 
 	//Read the Properties File from resources
-	      public static String readPropertiesFile(String propertyName) {
+	      public static String getProperty(String propertyName) {
 	    	      
 		    return properties.getProperty(propertyName);
 		     

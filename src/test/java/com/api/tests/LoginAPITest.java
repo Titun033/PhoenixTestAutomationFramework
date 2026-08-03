@@ -20,7 +20,7 @@ public class LoginAPITest {
 	public void loginAPITest() {
 		
 		given() 
-		.baseUri(readPropertiesFile("BASE_URI"))
+		.baseUri(getProperty("BASE_URI"))
 		.contentType(JSON)
 		.body(userCreds)
 		.log().all()
