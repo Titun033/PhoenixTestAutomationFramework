@@ -8,28 +8,30 @@
 	<name>PhoenixTestAutomationFramework</name>
 	<description>PhoenixTestAutomationFramework</description>
 	<build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.2</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>com.api.tests.UserDetailsAPIForFD</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        
-      </plugin>
-    </plugins>
-  </build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.5.2</version>
+
+				<configuration>
+
+					<suiteXmlFiles>
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+					</suiteXmlFiles>
+
+				</configuration>
+
+			</plugin>
+
+		</plugins>
+	</build>
 
 	<properties>
-	
-	    <maven.compiler.source>14 </maven.compiler.source>
-	    <maven.compiler.target>14</maven.compiler.target>
+
+		<maven.compiler.source>14 </maven.compiler.source>
+		<maven.compiler.target>14</maven.compiler.target>
 	</properties>
 	<dependencies>
 
@@ -51,14 +53,14 @@
 			<artifactId>json-schema-validator</artifactId>
 			<version>6.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.22.1</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
