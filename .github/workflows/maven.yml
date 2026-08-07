@@ -15,9 +15,6 @@ on:
        options: [qa,uat,dev]
        default: qa
        required: true
-
-   workflow_dispatch:
-    inputs:
       suiteXmlFile:
        description: "TestNG XML File"
        type: choice
