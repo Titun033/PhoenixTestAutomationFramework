@@ -18,7 +18,6 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -29,8 +28,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Test with maven
-      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv=qa
+    - name: Execute Test Automation Framework with maven
+      run: mvn clean test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env }}"
     - name: Upload a Build Artifact
       if: always()
       uses: actions/upload-artifact@v7.0.1
