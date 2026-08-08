@@ -30,7 +30,7 @@ public class CountAPIForFDTest {
         .body("data.count", everyItem(greaterThanOrEqualTo(0)))
         .body("data.label",everyItem(not(blankOrNullString())))
         .body("data.key", containsInAnyOrder("pending_for_delivery","created_today","pending_fst_assignment"))
-        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("responseSchema/CountAPIForFDResponseSchema.json"));
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("ResponseSchema/CountAPIForFDResponseSchema.json"));
 		
 	
         

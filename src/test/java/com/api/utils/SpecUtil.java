@@ -72,9 +72,18 @@ public class SpecUtil {
 		
 	}
 	
-	public static ResponseSpecification responseSpec(int statusCode) {
+	public static ResponseSpecification responseSpec_JSON(int statusCode) {
 		return new ResponseSpecBuilder()
 		        .expectContentType(ContentType.JSON)
+		        .expectStatusCode(statusCode)
+		        .expectResponseTime(Matchers.lessThan(1000L))
+		        .log(LogDetail.ALL)
+		        .build();
+		
+	}
+	
+	public static ResponseSpecification responseSpec(int statusCode) {
+		return new ResponseSpecBuilder()
 		        .expectStatusCode(statusCode)
 		        .expectResponseTime(Matchers.lessThan(1000L))
 		        .log(LogDetail.ALL)
