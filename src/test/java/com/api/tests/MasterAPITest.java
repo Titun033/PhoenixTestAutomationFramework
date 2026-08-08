@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import static com.api.constant.Role.*;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -17,19 +18,12 @@ public class MasterAPITest {
 	
 	@Test
 	public void masterAPITest() {
-		Header header= new Header("Authorization",AuthTokenProvider.getToken(FD));
+	
 		 given()
-		 .baseUri(ConfigManager.getProperty("BASE_URI"))
-		 .contentType(ContentType.JSON)
-		 .header(header)
-		 .log().uri()
-		 .log().body()
-         .when()
+		 .spec(SpecUtil.requestSpecWithAuth(FD))
          .post("/master")
          .then()
-         .log().all()
-         .statusCode(200)
-         .time(lessThan(1000L))
+         .spec(SpecUtil.responseSpec_OK())
          .body("message", equalTo("Success"))
          .body("data", notNullValue())
          .body("data",hasKey("mst_oem")) 
@@ -51,18 +45,12 @@ public class MasterAPITest {
 	
 	@Test
 	public void invalidToken() {
-		Header header= new Header("Authorization","abcd");
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URI"))
-		 .contentType(ContentType.JSON)
-		 .header(header)
-		 .log().uri()
-		 .log().body()
+		.spec(SpecUtil.reqestSpec())
          .when()
          .post("/master")
          .then()
-         .log().all()
-         .statusCode(403);
+         .spec(SpecUtil.responseSpec(401));
 		
 	}
 

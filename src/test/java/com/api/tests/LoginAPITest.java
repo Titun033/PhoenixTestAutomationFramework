@@ -8,6 +8,8 @@ import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
 import static com.api.utils.ConfigManager.*;
+
+import com.api.utils.SpecUtil;
 import com.pojo.UserCredentials;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -20,15 +22,11 @@ public class LoginAPITest {
 	public void loginAPITest() {
 		
 		given() 
-		.baseUri(getProperty("BASE_URI"))
-		.contentType(JSON)
-		.body(userCreds)
-		.log().all()
+		.spec(SpecUtil.reqestSpec(userCreds))
 		.when()
 		.post("/login")
 		.then()
-		.log().all()
-		.statusCode(200)
+		.spec(SpecUtil.responseSpec_OK())
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("responseSchema/loginAPIResponseSchema.json"))
 		.body("message", equalTo("Success"));
 	}
