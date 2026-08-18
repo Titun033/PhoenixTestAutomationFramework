@@ -6,7 +6,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
 
 import com.api.constant.Role;
-import com.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 
 public class AuthTokenProvider {
 	//Make a LoginAPI request, extract the token and print it on the console

@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 
 import static com.api.utils.ConfigManager.*;
 
+import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
-import com.pojo.UserCredentials;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
