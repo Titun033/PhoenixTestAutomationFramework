@@ -2,7 +2,7 @@ name: Phoenix Test Automation Framework
 
 on:
   push:
-    branches: [ "master" ]
+    
   pull_request:
     branches: [ "master" ]
   schedule:
