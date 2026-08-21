@@ -8,22 +8,22 @@ import org.testng.annotations.Test;
 import static com.api.constant.Role.*;
 import com.api.utils.AuthTokenProvider;
 import com.api.utils.ConfigManager;
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import io.restassured.module.jsv.JsonSchemaValidator;
+import static io.restassured.module.jsv.JsonSchemaValidator.*;
 
 public class MasterAPITest {
 	
-	@Test
+	@Test(description="Verifying if the Master API is giving correct response",groups= {"smoke","api","regression"})
 	public void masterAPITest() {
 	
 		 given()
-		 .spec(SpecUtil.requestSpecWithAuth(FD))
+		 .spec(requestSpecWithAuth(FD))
          .post("/master")
          .then()
-         .spec(SpecUtil.responseSpec_OK())
+         .spec(responseSpec_OK())
          .body("message", equalTo("Success"))
          .body("data", notNullValue())
          .body("data",hasKey("mst_oem")) 
@@ -40,17 +40,17 @@ public class MasterAPITest {
          .body("data.mst_oem.size()", greaterThan(0))
          .body("data.mst_oem.id", everyItem(notNullValue()))
          .body("data.mst_oem.name", everyItem(notNullValue()))
-         .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("ResponseSchema/MasterAPIResponseSchema.json"));
+         .body(matchesJsonSchemaInClasspath("ResponseSchema/MasterAPIResponseSchema.json"));
 	}
 	
-	@Test
+	@Test(description="Verifying if the Master API is giving correct response for invalid Token",groups= {"smoke","api","negative","regression"})
 	public void invalidToken() {
 		given()
-		.spec(SpecUtil.reqestSpec())
+		.spec(reqestSpec())
          .when()
          .post("/master")
          .then()
-         .spec(SpecUtil.responseSpec(401));
+         .spec(responseSpec(401));
 		
 	}
 
