@@ -9,7 +9,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.*;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
-import com.api.utils.SpecUtil;
+import static com.api.utils.SpecUtil.*;
 
 import static com.api.constant.Role.*;
 
@@ -19,15 +19,15 @@ import io.restassured.http.Header;
 
 public class UserDetailsAPIForFDTest {
 	
-	@Test
+	@Test(description="Verify if the UserDetails API response is shown correctly",groups= {"smoke","api","regression"})
 	 public void userDetailsForFDTest() {
 		
 		given()
-		.spec(SpecUtil.requestSpecWithAuth(FD))
+		.spec(requestSpecWithAuth(FD))
         .when()
         .get("userdetails")
         .then()
-       .spec(SpecUtil.responseSpec_OK())
+       .spec(responseSpec_OK())
         .body(matchesJsonSchemaInClasspath("ResponseSchema/UserDetailsAPIForFDResponseSchema.json"));
 	 }
 
