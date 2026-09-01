@@ -2,7 +2,7 @@ name: Phoenix Test Automation Framework
 
 on:
   push:
-    branches: [ "master", "feature/r7-create-job-api" ]
+    branches: [ "master"]
   pull_request:
     branches: [ "master" ]
   schedule:
@@ -18,7 +18,7 @@ on:
       suiteXmlFile:
        description: "TestNG XML File"
        type: choice
-       options: [testng.xml,smoke.xml,regression.xml]
+       options: [testng.xml,smoke.xml,regression.xml,testng-datadriven.xml]
        default: testng.xml
        required: true
 
