@@ -28,12 +28,12 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 
-public class CreateJobAPIDataDrivenTest {
+public class CreateJobAPIFakeDataDrivenTest {
 
 	@Test(description = "Verify if the Create API is able to create InWarranty Job", groups = { "smoke", "api",
-			"regression","datadriven","csv" },
+			"regression" ,"datadriven","faker"},
 			dataProviderClass=com.dataproviders.DataProviderUtils.class,
-			dataProvider="CreateJobAPIDataProvider")
+			dataProvider="CreateJobFakeAPIDataProvider")
 	public void createJobAPITest(CreateJobPayload createJobPayload) {
 
 		given().spec(requestSpecWithAuth(Role.FD, createJobPayload)).when().post("/job/create").then()
