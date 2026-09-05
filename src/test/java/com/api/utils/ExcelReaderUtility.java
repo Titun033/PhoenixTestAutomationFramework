@@ -12,10 +12,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.api.request.model.UserCredentials;
+import com.dataproviders.api.bean.UserBean;
+import com.poiji.bind.Poiji;
 
 public class ExcelReaderUtility {
     
-	public static Iterator<UserCredentials> loadExcelData(String fileName) {
+	public static <T> Iterator<T> loadExcelData(String fileName, Class<T> clazz) {
 		
 		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		XSSFWorkbook xssfwb = null;
@@ -29,18 +31,10 @@ public class ExcelReaderUtility {
 		
 		XSSFSheet sheet= xssfwb.getSheetAt(0);
 		
-		Iterator<Row> rowIterator=sheet.rowIterator();
+		List<T> dataList=Poiji.fromExcel(sheet, clazz);
+		return dataList.iterator();
 		
-		rowIterator.next();
-		List<UserCredentials> credsList= new ArrayList<UserCredentials>();
-		while(rowIterator.hasNext()) {
-			Row myRow=rowIterator.next();
-			UserCredentials userCreds=new UserCredentials(myRow.getCell(0).toString().trim(),myRow.getCell(1).toString().trim());
-			System.out.println(userCreds);
-			credsList.add(userCreds);
-		}
 		
-		return credsList.iterator();
 
 	}
 

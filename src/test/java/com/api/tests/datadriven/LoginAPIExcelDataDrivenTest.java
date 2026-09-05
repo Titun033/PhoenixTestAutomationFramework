@@ -20,10 +20,10 @@ public class LoginAPIExcelDataDrivenTest {
 	
 			
 			)
-	public void loginAPITest(UserCredentials userCreds) {
+	public void loginAPITest(UserBean userBean) {
 		
 		given() 
-		.spec(reqestSpec(userCreds))
+		.spec(reqestSpec(userBean))
 		.when()
 		.post("/login")
 		.then()
