@@ -17,7 +17,7 @@ import com.poiji.bind.Poiji;
 
 public class ExcelReaderUtility {
     
-	public static <T> Iterator<T> loadExcelData(String fileName, Class<T> clazz) {
+	public static <T> Iterator<T> loadExcelData(String fileName, String sheetName,Class<T> clazz) {
 		
 		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 		XSSFWorkbook xssfwb = null;
@@ -25,11 +25,11 @@ public class ExcelReaderUtility {
 		try {
 			xssfwb = new XSSFWorkbook(is);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		XSSFSheet sheet= xssfwb.getSheetAt(0);
+		XSSFSheet sheet= xssfwb.getSheet(sheetName);
 		
 		List<T> dataList=Poiji.fromExcel(sheet, clazz);
 		return dataList.iterator();
